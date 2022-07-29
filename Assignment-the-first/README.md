@@ -35,8 +35,13 @@ Please fill in your answers on [Answers.md](Answers.md)
     2. Determine the length of the reads in each file.
     3. Determine the phred encoding for these data.
 2.	Generate a per base distribution of quality scores for read1, read2, index1, and index2. Average the quality scores at each position for all reads and generate a per nucleotide mean distribution as you did in part 1 of PS4 (in Bi621).
-    1.	Turn in the 4 histograms.
-    2.	What is a good quality score cutoff for index reads and biological read pairs to utilize for sample identification and downstream analysis, respectively? Justify your answer.
+
+
+    ![](https://github.com/skupp32/Demultiplex/blob/master/Assignment-the-first/1294_S1_L008_R1_001_mean_qual.png)
+    ![](https://github.com/skupp32/Demultiplex/blob/master/Assignment-the-first/1294_S1_L008_R2_001_mean_qual.png)
+    ![](https://github.com/skupp32/Demultiplex/blob/master/Assignment-the-first/1294_S1_L008_R3_001_mean_qual.png)
+    ![](https://github.com/skupp32/Demultiplex/blob/master/Assignment-the-first/1294_S1_L008_R4_001_mean_qual.png)
+2.	What is a good quality score cutoff for index reads and biological read pairs to utilize for sample identification and downstream analysis, respectively? Justify your answer.
     3.	How many indexes have undetermined (N) base calls? (Utilize your command line tool knowledge. Submit the command(s) you used. CHALLENGE: use a one-line command)
 
 ## Part 2 – Develop an algorithm to de-multiplex the samples
