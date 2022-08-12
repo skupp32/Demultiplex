@@ -25,7 +25,7 @@ output_dir = args.output
 hamming_dist = args.ham_dist
 
 
-def rev_comp(seq)->str:
+def rev_comp(seq: str)->str:
     '''This function returns the reverse complement of a given sequence string.'''
     rc = ''
     for i in range(len(seq)):
@@ -43,7 +43,7 @@ def rev_comp(seq)->str:
             return False
     return rc
 
-def high_qual_read(qual_string,qual_cutoff,hamming_dist)->bool:
+def high_qual_read(qual_string: str,qual_cutoff: int,hamming_dist: int)->bool:
     '''This function returns True if all quality scores are >= given quality cutoff and False is any are < 20.'''
     low_qual = 0
     for i in qual_string:
@@ -54,7 +54,7 @@ def high_qual_read(qual_string,qual_cutoff,hamming_dist)->bool:
                 return False
     return True
 
-def hamming_distance(str1,str2)->int:
+def hamming_distance(str1: str,str2: str)->int:
     '''For 2 given strings, this returns the number of mismatches in the strings (hamming distance) and the number of n's in the strings'''
     dist = 0
     if len(str1) != len(str2):
@@ -66,7 +66,7 @@ def hamming_distance(str1,str2)->int:
 
     return dist
 
-def fastq_4_line_read(file_handle)->dict:
+def fastq_4_line_read(file_handle: str)->dict:
     ''' For a given file header, return the four lines of a fastq read and return a dictionary where each entry is one of the lines '''
 
     fastq_read = {}
@@ -78,7 +78,7 @@ def fastq_4_line_read(file_handle)->dict:
 
     return fastq_read
 
-def create_files(index_file)->[set,dict]:
+def create_files(index_file: str)->[set,dict]:
     '''This function will read all the indexes from the given file, return a list with each of the indexes, and open files to write with 
     the fileheaders in a dictionary for each read/index combo as well as r1 and r2 hopped and unknown'''
 
@@ -104,7 +104,7 @@ def create_files(index_file)->[set,dict]:
 
     return indexes,file_names
 
-def write_to_file(read_dict,output_file,index_dict)->dict:
+def write_to_file(read_dict: dict,output_file: str,index_dict: dict)->dict:
     '''Function to write contents of dictionary to a the given fastq file.
     read_dict will have one key for the header, the sequence, the "+", and the quality scores.
     The index_dict will have keys that are the output filenames with values as opened file objects to write to.'''
