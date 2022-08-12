@@ -25,7 +25,7 @@ output_dir = args.output
 hamming_dist = args.ham_dist
 
 
-def rev_comp(seq):
+def rev_comp(seq)->str:
     '''This function returns the reverse complement of a given sequence string.'''
     rc = ''
     for i in range(len(seq)):
@@ -186,28 +186,33 @@ with gzip.open(r1,mode = 'rt') as read1, gzip.open(r2,mode = 'rt') as index1, gz
 
 freqs = [i[1] for i in file_dict.values()]
 
-plt.figure(1)
-plt.bar(file_dict.keys(),freqs)
-plt.xlabel('File Name')
-plt.ylabel('Number of Records per File')
-plt.title('Distribution of Records')
-labels = file_dict.keys()
-ax = plt.gca()
-ax.set_xticklabels(labels=labels,rotation=45)
-plt.tight_layout()
-plt.savefig(f'{output_dir}/Output_distribution.png')
+
+'''
+These were plotting functions used in the first iteration of my code, but have since been replaced with a separate script.
+'''
+
+# plt.figure(1)
+# plt.bar(file_dict.keys(),freqs)
+# plt.xlabel('File Name')
+# plt.ylabel('Number of Records per File')
+# plt.title('Distribution of Records')
+# labels = file_dict.keys()
+# ax = plt.gca()
+# ax.set_xticklabels(labels=labels,rotation=45)
+# plt.tight_layout()
+# plt.savefig(f'{output_dir}/Output_distribution.png')
 
 
-plt.figure(2)
-plt.bar(hopped_record.keys(),hopped_record.values())
-plt.xlabel('Hopped Indexes')
-plt.ylabel('Number of Occurences')
-plt.title('Number of Instances for each Barcode Hopping')
-labels = hopped_record.keys()
-ax = plt.gca()
-ax.set_xticklabels(labels=labels,rotation=45)
-plt.tight_layout()
-plt.savefig(f'{output_dir}/Index_Hopping_Frequency')
+# plt.figure(2)
+# plt.bar(hopped_record.keys(),hopped_record.values())
+# plt.xlabel('Hopped Indexes')
+# plt.ylabel('Number of Occurences')
+# plt.title('Number of Instances for each Barcode Hopping')
+# labels = hopped_record.keys()
+# ax = plt.gca()
+# ax.set_xticklabels(labels=labels,rotation=45)
+# plt.tight_layout()
+# plt.savefig(f'{output_dir}/Index_Hopping_Frequency')
 
 with open(f'{output_dir}/results.txt','w') as fout:
     fout.write('Distribution of Records\n')
