@@ -101,3 +101,98 @@ r2_unknown.fastq- 12 lines 3 reads
 July 29, 2022
 Good cutoff score could be Q = 20 because the odds of misidentifying an index is low, but it still keeps much of the data.
 Finishing function defs in pseudocode and pushing to GitHub.
+
+# August 2, 2022
+Writing code to demultiplex fastq files.  Called `demux.py` in `/projects/bgmp/skupp/bioinfo/Bi622/Demultiplexing/Assignment-the-third`
+Functions all appear to work independently.  Need to write loop to read in every record, sort, and write to files.
+
+Make sure to run in conda env bgmp_py310
+
+For some reason some of the f-strings with dictionary names not working.
+
+Running test files with:
+```
+python demux.py -r1 $dir/r1_unit_test.fastq.gz -r2 $dir/r2_unit_test.fastq.gz -r3 $dir/r3_unit_test.fastq.gz -r4 $dir/r4_unit_test.fastq.gz -I indexes.txt -o $dir/output -c 20
+```
+
+# Auguest 3, 2022
+Running on slurm.  No errors so far.  There were too few files need to check what's going on.  My Histogram labels are also unreadable.  Need to re-run.  Also write code to produce an output results file.
+
+# August 8, 2022
+demux not correctly sorting files.  Need to check logic.  Also adding argparse statement to allow user to control the hamming distance between strings and the number of low quality reads.
+New command to run test files:
+```
+dir=/projects/bgmp/skupp/bioinfo/Bi622/Demultiplex/Assignment-the-third
+python demux.py -r1 $dir/r1_unit_test.fastq.gz -r2 $dir/r2_unit_test.fastq.gz -r3 $dir/r3_unit_test.fastq.gz -r4 $dir/r4_unit_test.fastq.gz -I indexes.txt -o $dir/output -c 20 -hd 0
+```
+Everything works for unit test now.  Issue was with test index file.  Re-running on whole data set.
+
+After running, there are now 2905973880 total lines in all of the files.  Need to compare with someone else.
+The plots still are difficult to make legible.  May need something like a heat map to properly display the data for index hopping.
+
+Output from /usr/bin/time -v for demux script:
+
+```
+Command being timed: "python demux.py -r1 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz -r2 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz -r3 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz -r4 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz -I /projects/bgmp/shared/2017_sequencing/indexes.txt -c 20 -o /projects/bgmp/skupp/bioinfo/Bi622/Demultiplex/Assignment-the-third/real_output -hd 2"
+        User time (seconds): 4494.23
+        System time (seconds): 117.40
+        Percent of CPU this job got: 93%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 1:21:59
+        Average shared text size (kbytes): 0
+        Average unshared data size (kbytes): 0
+        Average stack size (kbytes): 0
+        Average total size (kbytes): 0
+        Maximum resident set size (kbytes): 296156
+        Average resident set size (kbytes): 0
+        Major (requiring I/O) page faults: 0
+        Minor (reclaiming a frame) page faults: 2386795
+        Voluntary context switches: 50211
+        Involuntary context switches: 311668
+        Swaps: 0
+        File system inputs: 0
+        File system outputs: 0
+        Socket messages sent: 0
+        Socket messages received: 0
+        Signals delivered: 0
+        Page size (bytes): 4096
+        Exit status: 0
+
+```
+
+# August 9, 2022
+Creating script to plot data from results output file.  Struggling to use heatmaps.  Trying 3d barplot
+
+
+# August 11, 2022
+Using heatmap, plotted log10 of all number of index pairs to better display smaller data.
+The percentage of reads in each file is:
+
+```
+hopped: 0.16%
+TGTTCCGT: 4.24%
+GATCTTGC: 0.98%
+GATCAAGG: 1.77%
+TCTTCGAC: 11.31%
+ATCGTGGT: 1.85%
+CGATCGAT: 1.51%
+TCGACAAG: 1.03%
+unknown: 11.14%
+TCGAGAGT: 3.13%
+GCTACTCT: 1.96%
+TAGCCATG: 2.85%
+ATCATGCG: 2.69%
+TATGGCAC: 2.98%
+AGAGTCCA: 3.02%
+AGGATAGC: 2.33%
+ACGATCAG: 2.14%
+CACTTCAC: 1.12%
+TACCGGAT: 20.34%
+TCGGATTC: 1.23%
+CGGTAATC: 1.33%
+CTAGCTCA: 4.65%
+CTCTGGAT: 9.34%
+AACAGCGA: 2.37%
+GTCCTAAG: 2.36%
+GTAGCGTA: 2.17%
+```
+Plotting each type of file (unknown, hopped, and correctly matched for each index.)  Then pushing to GitHub.
