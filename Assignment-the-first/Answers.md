@@ -17,8 +17,9 @@
     ![](https://github.com/skupp32/Demultiplex/blob/master/Assignment-the-first/1294_S1_L008_R2_001_mean_qual.png)
     ![](https://github.com/skupp32/Demultiplex/blob/master/Assignment-the-first/1294_S1_L008_R3_001_mean_qual.png)
     ![](https://github.com/skupp32/Demultiplex/blob/master/Assignment-the-first/1294_S1_L008_R4_001_mean_qual.png)
-    3. A quality score above 20 should be sufficient to ensure that mixed reads do not mix.  This corresponds to per base error rate of 0.01.  Assuming that the smallest hamming distance is 4, the probability of misassigning an index is ~6.7e-7.  This is calculated by the binomial distribution probability density function: $ _8c_4 * 0.99^4 * 0.01^4 $  This would be expected to result in roughly 1 out of every 100,000 indexes being misidentified as another.
-    4. 
+    2. A quality score above 20 should be sufficient to ensure that mixed reads do not mix.  This corresponds to per base error rate of 0.01.  Assuming that the smallest hamming distance is 4, the probability of misassigning an index is ~6.7e-7.  This is calculated by the binomial distribution probability density function: $ _8c_4 * 0.99^4 * 0.01^4 $  
+This would be expected to result in roughly 1 out of every 100,000 indexes being misidentified as another.
+    3. 
         ```
         for file in `ls *R[2,3]*`; do echo $file; zcat $file| sed -n '2~4p' | grep -c "N"; done
         1294_S1_L008_R2_001.fastq.gz
